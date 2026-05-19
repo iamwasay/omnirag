@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
+// Pointing to your live, free Hugging Face cloud container
+const BACKEND_URL = "https://wasayiqbal-omnirag-backend.hf.space";
+
 function App() {
   const [file, setFile] = useState(null);
   const [query, setQuery] = useState("");
@@ -73,7 +76,7 @@ function App() {
       formData.append("file", selectedFile);
       formData.append("session_id", sessionId);
 
-      const response = await fetch("http://127.0.0.1:8000/upload", {
+      const response = await fetch(`${BACKEND_URL}/upload`, {
         method: "POST",
         body: formData,
       });
@@ -149,7 +152,7 @@ function App() {
       }
 
       const response = await fetch(
-        `http://127.0.0.1:8000/ask?${params.toString()}`
+        `${BACKEND_URL}/ask?${params.toString()}`
       );
 
       const data = await response.json();
